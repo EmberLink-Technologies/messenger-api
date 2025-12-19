@@ -17,3 +17,8 @@ def update_my_account():
 @account_router.get("/{user_id}")
 def get_user_account():
     pass
+
+
+@account_router.delete('/{user_id}/delete')
+def delete_account():
+    pass
