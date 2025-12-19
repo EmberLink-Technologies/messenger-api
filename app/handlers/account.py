@@ -5,13 +5,18 @@ from sqlalchemy import update
 from sqlalchemy.exc import NoResultFound
 
 from models.account import Account
+from schemas.account import UserRegistrationSchema
 
 
 class AccountManager:
-    #! I'll add password later!
     @classmethod
-    def create_user(cls, session: Session, data: dict[str, str]):
-        new_account = Account(**data)
+    def create_user(cls, session: Session, data: UserRegistrationSchema):
+        new_account = Account(
+            email=data.email,
+            full_name=data.full_name,
+            username=data.username,
+            password=data.password
+        )
         session.add(new_account)
         return new_account
 

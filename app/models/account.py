@@ -31,7 +31,7 @@ class Account(Base):
     registration_at: Mapped[date] = mapped_column(
         Date, server_default=func.current_date(), nullable=False
     )
-    # password: add later
+    password: Mapped[str] = mapped_column(String(255), nullable=False)
 
     def __repr__(self) -> str:
         return f"{self.id} with email: {self.email}"
