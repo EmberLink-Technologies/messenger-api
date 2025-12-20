@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 
-engine = create_engine('name_of_postgresql_database', echo=True)
+engine = create_engine('postgresql+psycopg://postgres:postgres@localhost/messenger-api-db', echo=True)
 Session = sessionmaker(engine, autoflush=False, autocommit=False)
 
 

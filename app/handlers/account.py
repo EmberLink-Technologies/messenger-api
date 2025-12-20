@@ -4,8 +4,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy import update
 from sqlalchemy.exc import NoResultFound
 
-from models.account import Account
-from schemas.account import UserRegistrationIn, UserSearch
+from ..models.account import Account
+from ..schemas.account import UserRegistrationIn, UserSearch
 
 
 class AccountManager:
