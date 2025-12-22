@@ -4,9 +4,9 @@ from argon2 import PasswordHasher
 ph = PasswordHasher()
 
 
-def create_password(password: str) -> str:
+def create_password_hash(password: str) -> str:
     return ph.hash(password)
 
 
-def check_password(password: str, hash: str) -> bool:
+def check_password_hash(password: str, hash: str) -> bool:
     return ph.verify(hash, password)
