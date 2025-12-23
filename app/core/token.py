@@ -13,7 +13,7 @@ def create_access_token(payload: dict):
     to_encode = payload.copy()
     expire = datetime.now() + timedelta(hours=1)
     to_encode.update({'exp': expire})
-    return jwt.encode(payload, SECRET_KEY, ALGORITHM)
+    return jwt.encode(to_encode, SECRET_KEY, ALGORITHM)
 
 
 def create_refresh_token():

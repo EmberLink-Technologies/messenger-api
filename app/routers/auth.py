@@ -25,7 +25,7 @@ def register(data: UserInDB, db: Session = Depends(get_db)):
     return AccountManager.create_user(session=db, data=data)
 
 
-def authenticate_user(email: str, password: str, db: Session = Depends(get_db)):
+def authenticate_user(email: str, password: str, db: Session):
     user = AccountManager.get_user_by_email(session=db, email=email)
     if not user:
         return False
@@ -36,9 +36,10 @@ def authenticate_user(email: str, password: str, db: Session = Depends(get_db)):
 
 @auth_router.post('/token', response_model=Token)
 def login_for_access_token(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()]
+    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+    db: Session = Depends(get_db)
 ):
-    user = authenticate_user(form_data.username, form_data.password)
+    user = authenticate_user(form_data.username, form_data.password, db=db)
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                             detail="Incorrect email or password", headers={"WWW-Authenticate": "Bearer"})
